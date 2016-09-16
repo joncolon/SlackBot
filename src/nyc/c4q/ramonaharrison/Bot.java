@@ -4,6 +4,7 @@ import nyc.c4q.ramonaharrison.model.Channel;
 import nyc.c4q.ramonaharrison.model.Message;
 import nyc.c4q.ramonaharrison.network.*;
 import nyc.c4q.ramonaharrison.network.response.*;
+//import nyc.c4q.ramonaharrison.util.FunFacts;
 
 import java.util.List;
 
@@ -17,7 +18,9 @@ public class Bot {
     // TODO: implement your bot logic!
 
     public Bot() {
-
+//        FunFacts funFacts = new FunFacts();
+//        funFacts.randomFact();
+//sendMessageToBotsChannel(FunFacts.getFact());
     }
 
     /**
@@ -54,20 +57,29 @@ public class Bot {
      */
     public void listMessages(String channelId) {
         ListMessagesResponse listMessagesResponse = Slack.listMessages(channelId);
-
+        List<Message> messages = listMessagesResponse.getMessages();
         if (listMessagesResponse.isOk()) {
-            List<Message> messages = listMessagesResponse.getMessages();
+
 
             System.out.println("\nMessages: ");
             for (Message message : messages) {
-                System.out.println();
-                System.out.println("Timestamp: " + message.getTs());
-                System.out.println("Message: " + message.getText());
+                    System.out.println();
+                    System.out.println("Timestamp: " + message.getTs());
+                    System.out.println("Message: " + message.getText());
             }
-        } else {
-            System.err.print("Error listing messages: " + listMessagesResponse.getError());
         }
-    }
+        else{
+                System.err.print("Error listing messages: " + listMessagesResponse.getError());
+            }
+        for (int i = 0; i < messages.size(); i++) {
+            Message locater = messages.get(i);
+            String text = locater.getText();
+            if (text.equals("@robotron")) {
+                System.out.println("Robotron has been mentioned!");
+
+            }
+        }
+        }
 
     /**
      * Sample method: sends a plain text message to the #bots channel. Prints a message indicating success or failure.
@@ -83,6 +95,12 @@ public class Bot {
             System.err.print("Error sending message: " + sendMessageResponse.getError());
         }
     }
+
+//    public void sendFunFactMessagetoBotsChannel(){
+//        SendMessageResponse sendFunFact = Slack.sendMessage(funfact);
+//        FunFacts funFact = new FunFacts();
+//        FunFacts.randomFact();
+//    }
 
     /**
      * Sample method: deletes a message from the #bots channel. Prints a message indicating success or failure.
