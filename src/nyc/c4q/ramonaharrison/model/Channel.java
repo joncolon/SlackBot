@@ -25,6 +25,7 @@ public class Channel {
     private Purpose purpose;
 
     private List<String> members;
+
     private Message latest;
 
     private boolean isArchived;

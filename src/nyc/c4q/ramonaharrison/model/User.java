@@ -1,142 +1,201 @@
 package nyc.c4q.ramonaharrison.model;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import sun.java2d.cmm.Profile;
+import org.json.simple.parser.JSONParser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Ramona Harrison
  * on 8/26/16
- * <p>
+ *
  * A class representing a user.
  * See https://api.slack.com/types/user
+ *
+ *
  */
 
 public class User {
 
-
-
     // TODO: implement private fields for each of the following user JSON keys:
 
-    private String id;
-    private String name;
-    private String deleted;
-    private String color;
-    private Profile profile;
-    private boolean is_admin;
-    private boolean is_owner;
-    private boolean is_primary_owner;
-    private boolean is_restricted;
-    private boolean is_ultra_restricted;
-    private boolean has_2fa;
-    private String two_factor_type;
-    private boolean has_files;
+    private String id ;
+    private String name ;
+    private boolean delete ;
+    private String color ;
+    private List<Field> profile;
+    private boolean isAdmin ;
+    private boolean isPrimaryOwner ;
+    private boolean isRestricted ;
+    private boolean isUltraRestricte ;
+    private boolean has2fa ;
+    private String twoFactorType ;
+    private boolean hasFiles ;
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////
 
     public User(JSONObject json) {
-        // TODO: parse a user from the incoming json
-        if(json.containsKey("id")){
+
+
+        if(json.containsKey("id")) {
             this.id = (String) json.get("id");
         }
 
-        if(json.containsKey("name")){
+
+        if (json.containsKey("profile")){
+            JSONArray jsonFields = (JSONArray) json.get("profile");
+            this.profile = new ArrayList<Field>();
+            for (int i = 0; i < jsonFields.size(); i++) { // we want to add onto our list
+                Field field = new Field((JSONObject)jsonFields.get(i));
+                this.profile.add(field);
+            }
+        }
+
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        if (json.containsKey("name")){
             this.name = (String) json.get("name");
         }
-
-        if(json.containsKey("deleted")){
-            this.deleted = (String) json.get("deleted");
+        if (json.containsKey("delete")){
+            this.delete = (boolean) json.get("delete");
         }
-
-        if(json.containsKey("color")){
+        if (json.containsKey("color")){
             this.color = (String) json.get("color");
         }
-
-        if(json.containsKey("two_factor_type")) {
-            this.two_factor_type = (String) json.get("two_factor_type");
+        if (json.containsKey("delete")){
+            this.delete = (boolean) json.get("delete");
+        }
+        if (json.containsKey("isadmin")){
+            this.isAdmin = (boolean) json.get("isAdmin");
+        }
+        if (json.containsKey("is_primary_owner")){
+            this.isPrimaryOwner = (boolean) json.get("is_primary_owner");
+        }
+        if (json.containsKey("is_restricted")){
+            this.isRestricted = (boolean) json.get("is_restricted");
+        }
+        if (json.containsKey("is_ultra_restricte")){
+            this.isUltraRestricte = (boolean) json.get("is_ultra_restricte");
+        }
+        if (json.containsKey("has_2fa")){
+            this.has2fa = (boolean) json.get("has_2fa");
+        }
+        if (json.containsKey("twoFactorType")){
+            this.twoFactorType = (String)json.get("twoFactorType");
+        }
+        if (json.containsKey("has_files")){
+            this.hasFiles = (boolean) json.get("has_files");
         }
 
-        if(json.containsKey("profile")) {
-            this.profile = (Profile) json.get("profile");
-        }
-
-        if(json.containsKey("is_admin")) {
-            this.is_admin = (Boolean) json.get("is_admin");
-        }
-
-        if(json.containsKey("is_owner")) {
-            this.is_owner = (Boolean) json.get("is_owner");
-        }
-
-        if(json.containsKey("is_primary_owner")) {
-            this.is_primary_owner = (Boolean) json.get("is_primary_owner");
-        }
-
-        if(json.containsKey("is_ultra_restricted")) {
-            this.is_ultra_restricted = (Boolean) json.get("is_ultra_restricted");
-        }
-
-        if(json.containsKey("is_restricted")) {
-            this.is_restricted = (Boolean) json.get("is_restricted");
-        }
-
-        if(json.containsKey("has_2fa")) {
-            this.has_2fa = (Boolean) json.get("has_2fa");
-        }
-
-        if(json.containsKey("has_files")) {
-            this.has_files = (Boolean) json.get("has_files");
-        }
     }
 
-    // TODO add getters to access private fields: COMPLETED
+    public User() {
 
+
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getDeleted() {
-        return deleted;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isDelete() {
+        return delete;
+    }
+
+    public void setDelete(boolean delete) {
+        this.delete = delete;
     }
 
     public String getColor() {
         return color;
     }
 
-    public Profile getProfile() {
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public List<Field> getProfile() {
         return profile;
     }
 
-    public boolean is_admin() {
-        return is_admin;
+    public void setProfile(List<Field> profile) {
+        this.profile = profile;
     }
 
-    public boolean is_owner() {
-        return is_owner;
+    public boolean isAdmin() {
+        return isAdmin;
     }
 
-    public boolean is_primary_owner() {
-        return is_primary_owner;
+    public void setIsAdmin(boolean is_admin) {
+        this.isAdmin = is_admin;
     }
 
-    public boolean is_restricted() {
-        return is_restricted;
+    public boolean isPrimaryOwner() {
+        return isPrimaryOwner;
     }
 
-    public boolean is_ultra_restricted() {
-        return is_ultra_restricted;
+    public void setIsPrimaryOwner(boolean is_primary_owner) {
+        this.isPrimaryOwner = is_primary_owner;
     }
 
-    public boolean isHas_2fa() {
-        return has_2fa;
+    public boolean isRestricted() {
+        return isRestricted;
     }
 
-    public String getTwo_factor_type() {
-        return two_factor_type;
+    public void setIsRestricted(boolean is_restricted) {
+        this.isRestricted = is_restricted;
     }
 
-    public boolean isHas_files() {
-        return has_files;
+    public boolean isUltraRestricte() {
+        return isUltraRestricte;
     }
+
+    public void setIsUltraRestricte(boolean is_ultra_restricte) {
+        this.isUltraRestricte = is_ultra_restricte;
+    }
+
+    public boolean isHas2fa() {
+        return has2fa;
+    }
+
+    public void setHas2fa(boolean has_2fa) {
+        this.has2fa = has_2fa;
+    }
+
+    public String getTwoFactorType() {
+        return twoFactorType;
+    }
+
+    public void settwoFactorType(String twoFactorType) {
+        this.twoFactorType = twoFactorType;
+    }
+
+    public boolean isHasFiles() {
+        return hasFiles;
+    }
+
+    public void setHasFiles(boolean has_files) {
+        this.hasFiles = has_files;
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 }

@@ -57,6 +57,10 @@ public class Message {
 
     }
 
+    public Message() {
+
+    }
+
     public String getText() {
         return text;
     }
@@ -71,5 +75,10 @@ public class Message {
 
     public List<Attachment> getAttachments() {
         return attachments;
+    }
+
+
+    public boolean contains(String s) {
+        return true;
     }
 }
