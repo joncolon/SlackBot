@@ -10,7 +10,6 @@ import java.util.List;
 /**
  * Created by Ramona Harrison
  * on 8/26/16
- *
  */
 
 public class Bot {
@@ -25,7 +24,7 @@ public class Bot {
      */
     public void testApi() {
         Response apiTest = Slack.testApi();
-        System.out.println("API OK: " +apiTest.isOk() + "\n");
+        System.out.println("API OK: " + apiTest.isOk() + "\n");
     }
 
     /**

@@ -9,10 +9,9 @@ import java.util.List;
 /**
  * Created by Ramona Harrison
  * on 8/26/16
- *
+ * <p>
  * A class representing a channel object, which contains information about a team channel.
  * See https://api.slack.com/types/channel
- *
  */
 
 public class Channel {
