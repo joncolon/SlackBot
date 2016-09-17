@@ -21,34 +21,38 @@ public class Main {
         myBot.listChannels();
 
         myBot.listMessages(Slack.BOTS_CHANNEL_ID);
+        myBot.checkForMentions();
+        if ((myBot.checkForMentions())) {
+            System.out.println("Robotron was mentioned " + myBot.mentionCounter() + " times in the past 100 messages!");
 
-        //TODO : Write some code here!
+            //TODO : Write some code here!
 
-        // Post "Hello, world!" to the #bots channel
-        //myBot.sendMessageToBotsChannel("Hello, world!");
+            // Post "Hello, world!" to the #bots channel
+            //myBot.sendMessageToBotsChannel("Hello, world!");
 
-        Timer timer = new Timer();
-        final String[] fact = new String[1];
-        fact[0] = "TEST";
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                Random random = new Random();
+            Timer timer = new Timer();
+            final String[] fact = new String[1];
+            fact[0] = "TEST";
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+                    Random random = new Random();
 
-                fact[0] = getFact(random);
-                myBot.sendMessageToBotsChannel(fact[0]);
-            }
+                    fact[0] = getFact(random);
+                    myBot.sendMessageToBotsChannel(fact[0]);
+                }
 
 
-        };
+            };
 
-        timer.schedule(task, 10000, 10000);
+            timer.schedule(task, 1000, 120000);
 
-        //myBot.sendFunFactMessagetoBotsChannel();
+            //myBot.sendFunFactMessagetoBotsChannel();
 
-        // Post a pineapple photo to the #bots channel
-        //myBot.sendMessageToBotsChannel("http://weknowyourdreams.com/images/pineapple/pineapple-07.jpg");
+            // Post a pineapple photo to the #bots channel
+            //myBot.sendMessageToBotsChannel("http://weknowyourdreams.com/images/pineapple/pineapple-07.jpg");
 
+        }
     }
 
 
@@ -78,11 +82,20 @@ public class Main {
         funfacts.add("According to a report it is illegal for U.S. citizens to have any contact with\n" +
                      "extraterrestrials or their vehicles under Title 14, Section 1211 of the Code of Federal regulations, implemented on July 16, 1969.");
         funfacts.add("In the year 1883 an astronomer named Jose Bonilla in Zacatecas, Mexico, took the first photograph of a UFO");
+        funfacts.add("BREAKING NEWS!!!! Long Island City has reported high volumes of alien activity!\n BE ON THE LOOKOUT FOR ANY WEIRD/ SUSPICIOUS ACTIVITY!!");
+        funfacts.add("BREAKING NEWS!!!! Another UFO spotted 1 minute ago in Queens, NY");
+        funfacts.add("BREAKING NEWS!!!!! Scientists say increasing evidence of aliens is surfacing.\n Officials state an abnormal amount of binary code coming from the Falchi building.");
+        funfacts.add("BREAKING NEWS!!!!! The government has joined forces with local aliens to implement Java technologies");
+        funfacts.add("BREAKING NEWS!!!!! Extra Terrestrials demand that everyone upgrade to Java 9 IMMEDIATELY!");
+        funfacts.add("BREAKING NEWS!!!!! Aliens spotted roaming Earth's atmosphere");
 
         //int randomNum = (int)(Math.random() * 12);
-        int fact = random.nextInt(14);
+        int fact = random.nextInt(20);
         System.out.println(funfacts.get(fact));
         return funfacts.get(fact);
+
+        // myBot.sendMessageToBotsChannel("http://www.troll.me/images/ancient-aliens-guy/testing-aliens-thumb.jpg");
+
 
     }
 }

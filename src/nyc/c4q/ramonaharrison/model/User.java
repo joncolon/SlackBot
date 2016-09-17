@@ -1,8 +1,10 @@
 package nyc.c4q.ramonaharrison.model;
 
 import org.json.simple.JSONObject;
+import sun.java2d.cmm.Profile;
 
 import java.util.List;
+import java.awt.Color;
 
 /**
  * Created by Ramona Harrison
@@ -15,19 +17,23 @@ import java.util.List;
 
 public class User {
 
+
+
     // TODO: implement private fields for each of the following user JSON keys:
-     private String id;
-     private String name;
-     private boolean deleted;
-     private String color;
-     private boolean is_admin;
-     private boolean is_owner;
-     private boolean is_primary_owner;
-     private boolean is_restricted;
-     private boolean is_ultra_restricted;
-     private boolean has_2fa;
-     private String two_factor_type;
-     private boolean has_files;
+
+    private String id;
+    private String name;
+    private String deleted;
+    private String color;//= Color.PINK;
+    private Profile profile;
+    private boolean is_admin;
+    private boolean is_owner;
+    private boolean is_primary_owner;
+    private boolean is_restricted;
+    private boolean is_ultra_restricted;
+    private boolean has_2fa;
+    private String two_factor_type;
+    private boolean has_files;
 
     public User(JSONObject json) {
         // TODO: parse a user from the incoming json
@@ -38,7 +44,7 @@ public class User {
             this.name = (String) json.get("name");
         }
         if (json.containsKey("deleted")){
-            this.deleted=(boolean) json.get("deleted");
+            this.deleted= (String) json.get("deleted");
         }
         if (json.containsKey("color")){
             this.color = (String) json.get("color");
@@ -70,16 +76,21 @@ public class User {
         }
     }
 
-    // TODO add getters to access private fields
+
+
+    // TODO add getters to access private fields: COMPLETED
+
     public String getId() {
         return id;
     }
+
 
     public String getName() {
         return name;
     }
 
-    public boolean isDeleted() {
+
+    public String getDeleted() {
         return deleted;
     }
 
@@ -87,6 +98,9 @@ public class User {
         return color;
     }
 
+    public Profile getProfile() {
+        return profile;
+    }
 
     public boolean is_admin() {
         return is_admin;

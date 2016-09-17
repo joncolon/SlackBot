@@ -17,6 +17,8 @@ import java.util.List;
 public class Attachment {
 
     // TODO: implement private fields for each of the following attachment JSON keys:
+
+        // TODO: implement private fields for each of the following attachment JSON keys: COMPLETED
     private String fallback;
     private String color;
     private String pretext;
@@ -103,6 +105,8 @@ public class Attachment {
         }
     }
 
+
+    // TODO add getters to access private fields
     public String getFallback() {
         return fallback;
     }
@@ -162,6 +166,5 @@ public class Attachment {
     public long getTs() {
         return ts;
     }
-    // TODO add getters to access private fields
 
 }

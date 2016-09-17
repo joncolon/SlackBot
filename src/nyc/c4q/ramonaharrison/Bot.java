@@ -7,11 +7,11 @@ import nyc.c4q.ramonaharrison.network.response.*;
 //import nyc.c4q.ramonaharrison.util.FunFacts;
 
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Created by Ramona Harrison
  * on 8/26/16
- *
  */
 
 public class Bot {
@@ -28,7 +28,7 @@ public class Bot {
      */
     public void testApi() {
         Response apiTest = Slack.testApi();
-        System.out.println("API OK: " +apiTest.isOk() + "\n");
+        System.out.println("API OK: " + apiTest.isOk() + "\n");
     }
 
     /**
@@ -63,21 +63,83 @@ public class Bot {
 
             System.out.println("\nMessages: ");
             for (Message message : messages) {
-                    System.out.println();
-                    System.out.println("Timestamp: " + message.getTs());
-                    System.out.println("Message: " + message.getText());
+                System.out.println();
+                System.out.println("Timestamp: " + message.getTs());
+                System.out.println("Message: " + message.getText());
+            }
+        } else {
+            System.err.print("Error listing messages: " + listMessagesResponse.getError());
+        }
+//        for (int i = 0; i < messages.size(); i++) {
+//            Message locater = messages.get(i);
+//            String text = locater.getText();
+//            if (text.equals("@robotron")) {
+//                System.out.println("Robotron has been mentioned!");
+//
+//            }
+//            else {
+//                System.out.println("Robotron has not been mentioned");
+//            }
+    }
+
+
+    public int mentionCounter() {
+        ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.BOTS_CHANNEL_ID);
+        List<Message> messages = listMessagesResponse.getMessages();
+        int x=0;
+        boolean isMentioned = false;
+        if (listMessagesResponse.isOk()) {
+
+
+            System.out.println("\nMessages: ");
+
+            for (Message message : messages) {
+                if (message.getText().contains("@U2ADC0F8C")) {
+
+                    isMentioned=true;
+                    x++;
+//                        System.out.println("Robotron was mentioned!");
+                }
+//                    else {
+//                        isMentioned=false;
+////                        System.out.println("Robotron has not been mentioned");
+//                    }
             }
         }
-        else{
-                System.err.print("Error listing messages: " + listMessagesResponse.getError());
-            }
-        for (int i = 0; i < messages.size(); i++) {
-            Message locater = messages.get(i);
-            String text = locater.getText();
-            if (text.equals("@robotron")) {
-                System.out.println("Robotron has been mentioned!");
+        return x;
+    }
 
+
+
+    public boolean checkForMentions() {
+        ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.BOTS_CHANNEL_ID);
+        List<Message> messages = listMessagesResponse.getMessages();
+        int x=0;
+        boolean isMentioned = false;
+        if (listMessagesResponse.isOk()) {
+
+
+            System.out.println("\nMessages: ");
+
+            for (Message message : messages) {
+                    if (message.getText().contains("@U2ADC0F8C")) {
+
+                        isMentioned=true;
+                        x++;
+//                        System.out.println("Robotron was mentioned!");
+                    }
+//                    else {
+//                        isMentioned=false;
+////                        System.out.println("Robotron has not been mentioned");
+//                    }
+                }
             }
+        if (isMentioned){
+            System.out.println("Robotron was mentioned " + x + " times in the last 100 messages!" );
+            return true;
+        }
+        else{
+            return false;
         }
         }
 
