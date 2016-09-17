@@ -1,7 +1,6 @@
 package nyc.c4q.ramonaharrison;
 
-import nyc.c4q.ramonaharrison.model.Channel;
-import nyc.c4q.ramonaharrison.model.Message;
+import nyc.c4q.ramonaharrison.model.*;
 import nyc.c4q.ramonaharrison.network.*;
 import nyc.c4q.ramonaharrison.network.response.*;
 
@@ -63,6 +62,8 @@ public class Bot {
                 System.out.println();
                 System.out.println("Timestamp: " + message.getTs());
                 System.out.println("Message: " + message.getText());
+                System.out.println("Message: " + message.getUser());
+
             }
         } else {
             System.err.print("Error listing messages: " + listMessagesResponse.getError());
@@ -74,7 +75,7 @@ public class Bot {
      *
      * @param text message text.
      */
-    public void sendMessageToBotsChannel(String text) {
+    public static void sendMessageToBotsChannel(String text) {
         SendMessageResponse sendMessageResponse = Slack.sendMessage(text);
 
         if (sendMessageResponse.isOk()) {
@@ -98,4 +99,7 @@ public class Bot {
             System.err.print("Error sending message: " + deleteMessageResponse.getError());
         }
     }
+
+
+
 }
