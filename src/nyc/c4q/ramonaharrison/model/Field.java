@@ -1,13 +1,21 @@
 package nyc.c4q.ramonaharrison.model;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**
- * Created by jonathancolon on 9/11/16.
+ * Created by wesniemarcelin on 9/11/16.
  */
 public class Field {
     private String title;
+
+    public String getValue() {
+        return value;
+    }
+
+    public boolean isShort() {
+        return isShort;
+    }
+
     private String value;
     private boolean isShort;
 
@@ -16,10 +24,10 @@ public class Field {
             this.title = (String) json.get("title");
         }
         if (json.containsKey("value")) {
-            this.title = (String) json.get("value");
+            this.value = (String) json.get("value");
         }
         if (json.containsKey("short")) {
-            this.isShort = (Boolean) json.get("short");
+            this.isShort = (boolean) json.get("short");
         }
     }
 }

@@ -4,20 +4,23 @@ import nyc.c4q.ramonaharrison.model.Channel;
 import nyc.c4q.ramonaharrison.model.Message;
 import nyc.c4q.ramonaharrison.network.*;
 import nyc.c4q.ramonaharrison.network.response.*;
+//import nyc.c4q.ramonaharrison.util.FunFacts;
 
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Created by Ramona Harrison
  * on 8/26/16
- *
  */
 
 public class Bot {
     // TODO: implement your bot logic!
 
     public Bot() {
-
+//        FunFacts funFacts = new FunFacts();
+//        funFacts.randomFact();
+//sendMessageToBotsChannel(FunFacts.getFact());
     }
 
     /**
@@ -25,7 +28,7 @@ public class Bot {
      */
     public void testApi() {
         Response apiTest = Slack.testApi();
-        System.out.println("API OK: " +apiTest.isOk() + "\n");
+        System.out.println("API OK: " + apiTest.isOk() + "\n");
     }
 
     /**
@@ -54,9 +57,9 @@ public class Bot {
      */
     public void listMessages(String channelId) {
         ListMessagesResponse listMessagesResponse = Slack.listMessages(channelId);
-
+        List<Message> messages = listMessagesResponse.getMessages();
         if (listMessagesResponse.isOk()) {
-            List<Message> messages = listMessagesResponse.getMessages();
+
 
             System.out.println("\nMessages: ");
             for (Message message : messages) {
@@ -67,7 +70,78 @@ public class Bot {
         } else {
             System.err.print("Error listing messages: " + listMessagesResponse.getError());
         }
+//        for (int i = 0; i < messages.size(); i++) {
+//            Message locater = messages.get(i);
+//            String text = locater.getText();
+//            if (text.equals("@robotron")) {
+//                System.out.println("Robotron has been mentioned!");
+//
+//            }
+//            else {
+//                System.out.println("Robotron has not been mentioned");
+//            }
     }
+
+
+    public int mentionCounter() {
+        ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.BOTS_CHANNEL_ID);
+        List<Message> messages = listMessagesResponse.getMessages();
+        int x=0;
+        boolean isMentioned = false;
+        if (listMessagesResponse.isOk()) {
+
+
+            System.out.println("\nMessages: ");
+
+            for (Message message : messages) {
+                if (message.getText().contains("@U2ADC0F8C")) {
+
+                    isMentioned=true;
+                    x++;
+//                        System.out.println("Robotron was mentioned!");
+                }
+//                    else {
+//                        isMentioned=false;
+////                        System.out.println("Robotron has not been mentioned");
+//                    }
+            }
+        }
+        return x;
+    }
+
+
+
+    public boolean checkForMentions() {
+        ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.BOTS_CHANNEL_ID);
+        List<Message> messages = listMessagesResponse.getMessages();
+        int x=0;
+        boolean isMentioned = false;
+        if (listMessagesResponse.isOk()) {
+
+
+            System.out.println("\nMessages: ");
+
+            for (Message message : messages) {
+                    if (message.getText().contains("@U2ADC0F8C")) {
+
+                        isMentioned=true;
+                        x++;
+//                        System.out.println("Robotron was mentioned!");
+                    }
+//                    else {
+//                        isMentioned=false;
+////                        System.out.println("Robotron has not been mentioned");
+//                    }
+                }
+            }
+        if (isMentioned){
+            System.out.println("Robotron was mentioned " + x + " times in the last 100 messages!" );
+            return true;
+        }
+        else{
+            return false;
+        }
+        }
 
     /**
      * Sample method: sends a plain text message to the #bots channel. Prints a message indicating success or failure.
@@ -83,6 +157,12 @@ public class Bot {
             System.err.print("Error sending message: " + sendMessageResponse.getError());
         }
     }
+
+//    public void sendFunFactMessagetoBotsChannel(){
+//        SendMessageResponse sendFunFact = Slack.sendMessage(funfact);
+//        FunFacts funFact = new FunFacts();
+//        FunFacts.randomFact();
+//    }
 
     /**
      * Sample method: deletes a message from the #bots channel. Prints a message indicating success or failure.

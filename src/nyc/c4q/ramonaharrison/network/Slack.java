@@ -21,12 +21,15 @@ import java.util.List;
 public class Slack {
 
     private static final String API_KEY = Token.findApiToken();
+    private static final String USER_NAME= "robotron";
     private static final String BASE_URL = "https://slack.com/api/";
     private static final String ENDPOINT_TEST = "api.test";
     private static final String ENDPOINT_LIST_CHANNELS = "channels.list";
     private static final String ENDPOINT_LIST_MESSAGES = "channels.history";
     private static final String ENDPOINT_POST_MESSAGE = "chat.postMessage";
     private static final String ENDPOINT_DELETE_MESSAGE = "chat.delete";
+    private static final String USER_ICON = "http://www.mememaker.net/static/images/templates/699.jpg";
+
 
     public static final String BOTS_CHANNEL_ID = "C2ABKERFT";
 
@@ -68,6 +71,13 @@ public class Slack {
         return new ListMessagesResponse(HTTPS.get(listMessagesUrl));
     }
 
+    //Static method used to check if there were any mentions of robot name
+//
+//    public static ListMessagesResponse checkForMentions() {
+//
+//        if (Slack.listMessages().con)
+//   }
+
     /**
      * Static method to send a message to the #bots channel.
      *
@@ -82,7 +92,7 @@ public class Slack {
             throw new RuntimeException(e);
         }
 
-        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + "&text=" + messageText);
+        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY +"&icon_url=" + USER_ICON + "&username=" + USER_NAME + "&channel=" + BOTS_CHANNEL_ID + "&text=" + messageText);
 
         return new SendMessageResponse(HTTPS.get(sendMessageUrl));
     }

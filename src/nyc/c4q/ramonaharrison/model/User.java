@@ -3,6 +3,9 @@ package nyc.c4q.ramonaharrison.model;
 import org.json.simple.JSONObject;
 import sun.java2d.cmm.Profile;
 
+import java.util.List;
+import java.awt.Color;
+
 /**
  * Created by Ramona Harrison
  * on 8/26/16
@@ -21,7 +24,7 @@ public class User {
     private String id;
     private String name;
     private String deleted;
-    private String color;
+    private String color;//= Color.PINK;
     private Profile profile;
     private boolean is_admin;
     private boolean is_owner;
@@ -37,55 +40,43 @@ public class User {
         if(json.containsKey("id")){
             this.id = (String) json.get("id");
         }
-
-        if(json.containsKey("name")){
+        if (json.containsKey("name")){
             this.name = (String) json.get("name");
         }
-
-        if(json.containsKey("deleted")){
-            this.deleted = (String) json.get("deleted");
+        if (json.containsKey("deleted")){
+            this.deleted= (String) json.get("deleted");
         }
-
-        if(json.containsKey("color")){
+        if (json.containsKey("color")){
             this.color = (String) json.get("color");
         }
 
-        if(json.containsKey("two_factor_type")) {
+        if (json.containsKey("is_admin")){
+            this.is_admin = (boolean) json.get("is_admin");
+        }
+        if (json.containsKey("is_owner")){
+            this.is_owner = (boolean) json.get("is_owner");
+        }
+        if (json.containsKey("is_primary_owner")){
+            this.is_primary_owner = (boolean) json.get("is_primary_owner");
+        }
+        if (json.containsKey("is_restricted")){
+            this.is_restricted = (boolean) json.get("is_restricted");
+        }
+        if (json.containsKey("is_ultra_restricted")){
+            this.is_ultra_restricted = (boolean) json.get("is_ultra_restricted");
+        }
+        if (json.containsKey("has_2fa")){
+            this.has_2fa = (boolean) json.get("has_2fa");
+        }
+        if (json.containsKey("two_factor_type")){
             this.two_factor_type = (String) json.get("two_factor_type");
         }
-
-        if(json.containsKey("profile")) {
-            this.profile = (Profile) json.get("profile");
-        }
-
-        if(json.containsKey("is_admin")) {
-            this.is_admin = (Boolean) json.get("is_admin");
-        }
-
-        if(json.containsKey("is_owner")) {
-            this.is_owner = (Boolean) json.get("is_owner");
-        }
-
-        if(json.containsKey("is_primary_owner")) {
-            this.is_primary_owner = (Boolean) json.get("is_primary_owner");
-        }
-
-        if(json.containsKey("is_ultra_restricted")) {
-            this.is_ultra_restricted = (Boolean) json.get("is_ultra_restricted");
-        }
-
-        if(json.containsKey("is_restricted")) {
-            this.is_restricted = (Boolean) json.get("is_restricted");
-        }
-
-        if(json.containsKey("has_2fa")) {
-            this.has_2fa = (Boolean) json.get("has_2fa");
-        }
-
-        if(json.containsKey("has_files")) {
-            this.has_files = (Boolean) json.get("has_files");
+        if (json.containsKey("has_files")){
+            this.has_files = (boolean) json.get("has_files");
         }
     }
+
+
 
     // TODO add getters to access private fields: COMPLETED
 
@@ -93,9 +84,11 @@ public class User {
         return id;
     }
 
+
     public String getName() {
         return name;
     }
+
 
     public String getDeleted() {
         return deleted;
@@ -140,4 +133,5 @@ public class User {
     public boolean isHas_files() {
         return has_files;
     }
+
 }
