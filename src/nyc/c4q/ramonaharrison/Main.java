@@ -1,24 +1,18 @@
 package nyc.c4q.ramonaharrison;
 
+import nyc.c4q.ramonaharrison.model.Message;
 import nyc.c4q.ramonaharrison.network.Slack;
+import nyc.c4q.ramonaharrison.network.response.ListMessagesResponse;
+import nyc.c4q.ramonaharrison.util.Trolling;
+
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 
     public static void main(String[] args) {
-
-        Bot myBot = new Bot();
-
-        myBot.testApi();
-
-        myBot.listChannels();
-
-        myBot.listMessages(Slack.BOTS_CHANNEL_ID);
-
-        // Post "Hello, world!" to the #bots channel
-        //myBot.sendMessage("Hello, world!");
-
-        // Post a pineapple photo to the #bots channel
-        // myBot.sendMessageToBotsChannel("http://www.troll.me/images/ancient-aliens-guy/testing-aliens-thumb.jpg");
-
+        Trolling.timer();
     }
 }
+
+

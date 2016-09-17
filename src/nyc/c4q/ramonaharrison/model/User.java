@@ -6,10 +6,9 @@ import sun.java2d.cmm.Profile;
 /**
  * Created by Ramona Harrison
  * on 8/26/16
- *
+ * <p>
  * A class representing a user.
  * See https://api.slack.com/types/user
- *
  */
 
 public class User {

@@ -13,9 +13,8 @@ import java.util.List;
 /**
  * Created by Ramona Harrison
  * on 8/26/16
- *
+ * <p>
  * A class for interacting with Slack's Web API.
- *
  */
 
 public class Slack {
@@ -36,7 +35,7 @@ public class Slack {
      * @return the Response indicating ok/error or null if the connection failed.
      */
     public static Response testApi() {
-        URL testUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_TEST  + "?token=" + API_KEY);
+        URL testUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_TEST + "?token=" + API_KEY);
 
         JSONObject object = HTTPS.get(testUrl);
 
@@ -58,7 +57,7 @@ public class Slack {
     /**
      * Static method to list the last 100 message on a given channel.
      *
-     * @param  channelId the id of the channel from which to list messages.
+     * @param channelId the id of the channel from which to list messages.
      * @return the ListMessagesResponse indicating ok/error or null if the connection failed.
      */
     public static ListMessagesResponse listMessages(String channelId) {
@@ -71,7 +70,7 @@ public class Slack {
     /**
      * Static method to send a message to the #bots channel.
      *
-     * @param  messageText the message text.
+     * @param messageText the message text.
      * @return the SendMessageResponse indicating ok/error or null if the connection failed.
      */
     public static SendMessageResponse sendMessage(String messageText) {
@@ -90,8 +89,8 @@ public class Slack {
     /**
      * Static method to send a message with one or more attachments to the #bots channel.
      *
-     * @param  messageText the message text.
-     * @param  attachments a list of one of more attachments to be parsed to a JSON-encoded URL string parameter.
+     * @param messageText the message text.
+     * @param attachments a list of one of more attachments to be parsed to a JSON-encoded URL string parameter.
      * @return the SendMessageResponse indicating ok/error or null if the connection failed.
      */
     public static SendMessageResponse sendMessageWithAttachments(String messageText, List<Attachment> attachments) {
@@ -103,7 +102,7 @@ public class Slack {
     /**
      * Static method to delete an existing message from the #bots channel.
      *
-     * @param  messageTs the message timestamp.
+     * @param messageTs the message timestamp.
      * @return the DeleteMessageResponse indicating ok/error or null if the connection failed.
      */
     public static DeleteMessageResponse deleteMessage(String messageTs) {
